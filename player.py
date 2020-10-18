@@ -1,6 +1,5 @@
 """
-This module is used to hold the Player class. The Player represents the user-
-controlled sprite on the screen.
+This module is used to hold the Player class. The Player represents my sprite on the screen.
 """
 import pygame
 
@@ -10,8 +9,6 @@ from platforms import MovingPlatform
 from spritesheet_functions import SpriteSheet
 
 class Player(pygame.sprite.Sprite):
-    """ This class represents the bar at the bottom that the player
-    controls. """
 
     # -- Attributes
     # Set speed vector of player
@@ -38,36 +35,57 @@ class Player(pygame.sprite.Sprite):
 
         sprite_sheet = SpriteSheet("p1_walk.png")
         # Load all the right facing images into a list
-        image = sprite_sheet.get_image(0, 0, 66, 129)
+        image = sprite_sheet.get_image(75, 4, 90, 81)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(75, 0, 75, 129)
+        
+        # Load all the right facing images into a list
+        image = sprite_sheet.get_image(4, 4, 70, 81)
         self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(160, 0, 67, 129)
+        
+        # Load all the right facing images into a list
+        image = sprite_sheet.get_image(175, 4, 48, 81)
+        self.walking_frames_r.append(image)
+        
+        # Load all the right facing images into a list
+        image = sprite_sheet.get_image(225, 4, 90, 81)
         self.walking_frames_r.append(image)
         
         # Load all the right facing images, then flip them
-        # to face left.
-        image = sprite_sheet.get_image(0, 0, 66, 129)
+        # to face left.d
+        #image = sprite_sheet.get_image(230, 95, 285, 170)
+        #image = pygame.transform.flip(image, True, False)
+        #self.walking_frames_l.append(image)
+        
+        # Load all the right facing images into a list
+        image = sprite_sheet.get_image(75, 4, 90, 81)
         image = pygame.transform.flip(image, True, False)
         self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(75, 0, 75, 129)
+        
+        # Load all the right facing images into a list
+        image = sprite_sheet.get_image(4, 4, 70, 81)
         image = pygame.transform.flip(image, True, False)
         self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(160, 0, 67, 129)
+        
+        # Load all the right facing images into a list
+        image = sprite_sheet.get_image(175, 4, 48, 81)
         image = pygame.transform.flip(image, True, False)
+        self.walking_frames_l.append(image)
+        
+        # Load all the right facing images into a list
+        image = sprite_sheet.get_image(225, 4, 90, 81)
+        image = pygame.transform.flip(image, True, False)
+        self.walking_frames_l.append(image)
 
         # Set the image the player starts with
         self.image = self.walking_frames_r[0]
-
-        # Set a referance to the image rect.
         self.rect = self.image.get_rect()
 
     def update(self):
+        
         """ Move the player. """
-        # Gravity
         self.calc_grav()
 
-        # Move left/right
+        # Move
         self.rect.x += self.change_x
         pos = self.rect.x + self.level.world_shift
         if self.direction == "R":
@@ -89,6 +107,7 @@ class Player(pygame.sprite.Sprite):
                 self.rect.left = block.rect.right
 
         # Move up/down
+        
         self.rect.y += self.change_y
 
         # Check and see if we hit anything
@@ -118,13 +137,10 @@ class Player(pygame.sprite.Sprite):
         if self.rect.y >= constants.SCREEN_HEIGHT - self.rect.height and self.change_y >= 0:
             self.change_y = 0
             self.rect.y = constants.SCREEN_HEIGHT - self.rect.height
-
+    
     def jump(self):
-        """ Called when user hits 'jump' button. """
-
-        # move down a bit and see if there is a platform below us.
-        # Move down 2 pixels because it doesn't work well if we only move down 1
-        # when working with a platform moving down.
+        """ Called when I hit 'jump' button. """
+        
         self.rect.y += 2
         platform_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
         self.rect.y -= 2
@@ -132,18 +148,22 @@ class Player(pygame.sprite.Sprite):
         # If it is ok to jump, set our speed upwards
         if len(platform_hit_list) > 0 or self.rect.bottom >= constants.SCREEN_HEIGHT:
             self.change_y = -10
-
     # Player-controlled movement:
     def go_left(self):
         """ Called when the user hits the left arrow. """
-        self.change_x = -6
+        self.change_x = -4
         self.direction = "L"
 
     def go_right(self):
         """ Called when the user hits the right arrow. """
-        self.change_x = 6
+        self.change_x = 4
         self.direction = "R"
 
     def stop(self):
         """ Called when the user lets off the keyboard. """
+        pygame.sprite.Sprite.__init__(self)
         self.change_x = 0
+        sprite_sheet = SpriteSheet("p1_walk.png")
+        image = sprite_sheet.get_image(4, 4, 70, 81)
+        image = pygame.transform.flip(image, True, False)
+        self.walking_frames_l.append(image)

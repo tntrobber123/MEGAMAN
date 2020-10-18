@@ -1,34 +1,9 @@
-"""
-Sample Python/Pygame Programs
-Simpson College Computer Science
-http://programarcadegames.com/
-http://simpson.edu/computer-science/
-
-Main module for platform scroller example.
-
-From:
-http://programarcadegames.com/python_examples/sprite_sheets/
-
-Explanation video: http://youtu.be/czBDKWJqOao
-
-Part of a series:
-http://programarcadegames.com/python_examples/f.php?file=move_with_walls_example.py
-http://programarcadegames.com/python_examples/f.php?file=maze_runner.py
-http://programarcadegames.com/python_examples/f.php?file=platform_jumper.py
-http://programarcadegames.com/python_examples/f.php?file=platform_scroller.py
-http://programarcadegames.com/python_examples/f.php?file=platform_moving.py
-http://programarcadegames.com/python_examples/sprite_sheets/
-
-Game art from Kenney.nl:
-http://opengameart.org/content/platformer-art-deluxe
-
-"""
 
 import pygame
 
 import constants
 import levels
-
+from spritesheet_functions import SpriteSheet
 from player import Player
 
 def main():
@@ -39,7 +14,7 @@ def main():
     size = [constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT]
     screen = pygame.display.set_mode(size)
 
-    pygame.display.set_caption("Platformer with sprite sheets")
+    pygame.display.set_caption("MEGA MAN PROJECT")
 
     # Create the player
     player = Player()
@@ -48,6 +23,7 @@ def main():
     level_list = []
     level_list.append(levels.Level_01(player))
     level_list.append(levels.Level_02(player))
+    level_list.append(levels.Level_03(player))
 
     # Set the current level
     current_level_no = 0
@@ -85,7 +61,7 @@ def main():
                     player.stop()
                 if event.key == pygame.K_RIGHT and player.change_x > 0:
                     player.stop()
-
+                    
         # Update the player.
         active_sprite_list.update()
 
@@ -113,11 +89,9 @@ def main():
                 current_level = level_list[current_level_no]
                 player.level = current_level
 
-        # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         current_level.draw(screen)
         active_sprite_list.draw(screen)
 
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
         # Limit to 60 frames per second
         clock.tick(60)

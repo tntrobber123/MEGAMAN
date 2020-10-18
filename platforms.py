@@ -2,6 +2,7 @@
 Module for managing platforms.
 """
 import pygame
+import sys
 
 from spritesheet_functions import SpriteSheet
 
@@ -12,16 +13,15 @@ from spritesheet_functions import SpriteSheet
 #   Width of sprite
 #   Height of sprite
 
-GRASS_LEFT            = (576, 720, 70, 70)
-GRASS_RIGHT           = (576, 576, 70, 70)
-GRASS_MIDDLE          = (504, 576, 70, 70)
-STONE_PLATFORM_LEFT   = (432, 720, 70, 40)
-STONE_PLATFORM_MIDDLE = (648, 648, 70, 40)
-STONE_PLATFORM_RIGHT  = (792, 648, 70, 40)
+GRASS_LEFT            = (5, 10, 65, 65)
+GRASS_RIGHT           = (145, 10, 65, 65)
+GRASS_MIDDLE          = (75, 10, 65, 65)
+STONE_PLATFORM_LEFT   = (432, 720, 65, 65)
+STONE_PLATFORM_MIDDLE = (648, 648, 65, 65)
+STONE_PLATFORM_RIGHT  = (792, 648, 65, 65)
 
 class Platform(pygame.sprite.Sprite):
     """ Platform the user can jump on """
-
     def __init__(self, sprite_sheet_data):
         """ Platform constructor. Assumes constructed with user passing in
             an array of 5 numbers like what's defined at the top of this
@@ -29,6 +29,9 @@ class Platform(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         sprite_sheet = SpriteSheet("tiles_spritesheet.png")
+        #spritesheet = pygame.transform.rotozoom("tiles_spritesheet.png", 0, 2)
+        #self.sprite_sheet = pygame.transform.scale(self."tiles_spritesheet.png" (2, 2))
+        
         # Grab the image for this platform
         self.image = sprite_sheet.get_image(sprite_sheet_data[0],
                                             sprite_sheet_data[1],
