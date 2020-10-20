@@ -13,9 +13,9 @@ from spritesheet_functions import SpriteSheet
 #   Width of sprite
 #   Height of sprite
 
-GRASS_LEFT            = (5, 10, 65, 65)
-GRASS_RIGHT           = (145, 10, 65, 65)
-GRASS_MIDDLE          = (75, 10, 65, 65)
+GRASS_LEFT            = (0, 0, 75, 75)
+GRASS_RIGHT           = (0, 0, 75, 75)
+GRASS_MIDDLE          = (0, 0, 75, 75)
 STONE_PLATFORM_LEFT   = (432, 720, 65, 65)
 STONE_PLATFORM_MIDDLE = (648, 648, 65, 65)
 STONE_PLATFORM_RIGHT  = (792, 648, 65, 65)
@@ -29,9 +29,6 @@ class Platform(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         sprite_sheet = SpriteSheet("tiles_spritesheet.png")
-        #spritesheet = pygame.transform.rotozoom("tiles_spritesheet.png", 0, 2)
-        #self.sprite_sheet = pygame.transform.scale(self."tiles_spritesheet.png" (2, 2))
-        
         # Grab the image for this platform
         self.image = sprite_sheet.get_image(sprite_sheet_data[0],
                                             sprite_sheet_data[1],
