@@ -40,7 +40,7 @@ class Level():
 
         # Draw the background
         # We don't shift the background as much as the sprites are shifted
-        screen.fill(constants.BLUE)
+        screen.fill(constants.BLACK)
         screen.blit(self.background,(self.world_shift // 3,0))
 
         # Draw all the sprite lists that we have
@@ -207,6 +207,3 @@ class Level_03(Level):
             block.rect.y = platform[2]
             block.player = self.player
             self.platform_list.add(block)
-        
-
-
